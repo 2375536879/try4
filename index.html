@@ -417,27 +417,60 @@
 
     <script>
     // 分类筛选功能
-    document.querySelectorAll('.category-chip').forEach(chip => {
-        chip.addEventListener('click', () => {
-            // 移除所有激活状态
-            document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
-            // 添加当前激活状态
-            chip.classList.add('active');
-            // 获取分类名称
-            const category = chip.textContent.trim();
-            // 筛选逻辑（需根据实际内容实现）
-            filterTools(category);
-        });
+document.querySelectorAll('.category-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+        // 移除所有激活状态
+        document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
+        // 添加当前激活状态
+        chip.classList.add('active');
+        // 获取分类名称
+        const category = chip.textContent.trim();
+        // 筛选逻辑（调用 filterTools 函数）
+        filterTools(category);
     });
+});
 
-    function filterTools(category) {
-        const cards = document.querySelectorAll('.tool-card');
-        cards.forEach(card => {
-            // 实际项目中应根据数据属性进行筛选
-            const match = category === '全部工具' || card.querySelector('h3').textContent.includes(category);
-            card.style.display = match ? 'block' : 'none';
-        });
-    }
+function filterTools(category) {
+    const cards = document.querySelectorAll('.tool-card');
+    cards.forEach(card => {
+        // 获取卡片标题
+        const title = card.querySelector('h3').textContent.trim();
+
+        // 根据分类名称进行筛选
+        switch (category) {
+            case '全部工具':
+                // 显示所有卡片
+                card.style.display = 'block';
+                break;
+
+            case '文献检索':
+                // 只显示包含 "文献检索" 相关的卡片
+                card.style.display = title.includes('文献检索') ? 'block' : 'none';
+                break;
+
+            case '文献管理':
+                // 只显示包含 "文献管理" 相关的卡片
+                card.style.display = title.includes('文献管理') ? 'block' : 'none';
+                break;
+
+            case '论文写作':
+                // 只显示包含 "论文写作" 相关的卡片
+                card.style.display = title.includes('论文写作') ? 'block' : 'none';
+                break;
+
+            case '科研绘图':
+                // 只显示包含 "科研绘图" 相关的卡片
+                card.style.display = title.includes('科研绘图') ? 'block' : 'none';
+                break;
+
+            default:
+                // 如果没有匹配的分类，隐藏所有卡片
+                card.style.display = 'none';
+                break;
+        }
+    });
+}
+
     </script>
 </body>
 </html>
