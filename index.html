@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LabGuide - 科研文献工具指南</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+    :root {
+        --primary-blue: #2A5CAA;
+        --background: #F8F9FA;
+        --text-primary: #212529;
+        --border: #DEE2E6;
+        --success: #43a047;
+        --warning: #ffc107;
+        --info: #2196f3;
+    }
+
+    body {
+        background: var(--background);
+        font-family: 'Segoe UI', system-ui, sans-serif;
+        color: var(--text-primary);
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    .science-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .header {
+        border-bottom: 3px solid var(--primary-blue);
+        padding: 2rem 0;
+        margin-bottom: 1rem;
+    }
+
+    .title {
+        font-size: 2.8rem;
+        color: var(--primary-blue);
+        font-weight: 600;
+        letter-spacing: -0.05em;
+        margin: 0;
+    }
+
+    /* 搜索区域 */
+    .search-section {
+        display: grid;
+        gap: 1.5rem;
+        max-width: 800px;
+        margin: 0 auto 2rem;
+    }
+
+    .search-box {
+        display: flex;
+        border: 2px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+        transition: box-shadow 0.2s;
+    }
+
+    .search-box:focus-within {
+        box-shadow: 0 2px 8px rgba(42,92,170,0.1);
+        border-color: var(--primary-blue);
+    }
+
+    .search-input {
+        flex: 1;
+        padding: 1rem;
+        border: none;
+        font-size: 1.1rem;
+        outline: none;
+    }
+
+    .search-button {
+        background: var(--primary-blue);
+        color: white;
+        padding: 1rem 2rem;
+        border: none;
+        cursor: pointer;
+        transition: opacity 0.2s;
+    }
+
+    .search-button:hover {
+        opacity: 0.9;
+    }
+
+    /* 分类导航 */
+    .category-nav {
+        display: flex;
+        gap: 1rem;
+        margin: 2rem 0;
+        flex-wrap: wrap;
+    }
+
+    .category-chip {
+        padding: 0.6rem 1.2rem;
+        border-radius: 20px;
+        background: rgba(42,92,170,0.1);
+        color: var(--primary-blue);
+        cursor: pointer;
+        transition: background 0.2s;
+        font-size: 0.95rem;
+    }
+
+    .category-chip.active {
+        background: var(--primary-blue);
+        color: white;
+    }
+
+    /* 工具卡片 */
+    .tool-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .tool-card {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1.5rem;
+        transition: transform 0.2s;
+        position: relative;
+    }
+
+    .tool-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .tool-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1.2rem;
+    }
+
+    .tool-icon {
+        width: 48px;
+        height: 48px;
+        background: rgba(42,92,170,0.1);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .tool-icon i {
+        color: var(--primary-blue);
+        font-size: 1.4rem;
+    }
+
+    .tool-badges {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .badge {
+        padding: 0.25rem 0.75rem;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .badge.free {
+        background: rgba(67, 160, 71, 0.1);
+        color: var(--success);
+    }
+
+    .badge.recommend {
+        background: rgba(255, 193, 7, 0.1);
+        color: var(--warning);
+    }
+
+    .badge.open-source {
+        background: rgba(33, 150, 243, 0.1);
+        color: var(--info);
+    }
+
+    .tool-features {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin: 1rem 0;
+    }
+
+    .feature-tag {
+        background: rgba(42,92,170,0.05);
+        color: var(--primary-blue);
+        padding: 0.3rem 0.8rem;
+        border-radius: 12px;
+        font-size: 0.9rem;
+    }
+
+    .tool-desc {
+        color: #666;
+        margin: 1rem 0;
+        line-height: 1.5;
+        min-height: 3.6em;
+    }
+
+    .tool-meta {
+        display: flex;
+        justify-content: space-between;
+        margin: 1.5rem -0.5rem 0;
+        padding: 1rem 0;
+        border-top: 1px solid var(--border);
+    }
+
+    .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #666;
+        padding: 0 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .tool-action {
+        width: 100%;
+        padding: 0.8rem;
+        background: var(--primary-blue);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: opacity 0.2s;
+        font-size: 1rem;
+    }
+
+    .tool-action:hover {
+        opacity: 0.9;
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+        .science-container {
+            padding: 1.5rem;
+        }
+
+        .title {
+            font-size: 2.2rem;
+        }
+
+        .search-button {
+            padding: 1rem;
+        }
+
+        .tool-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="science-container">
+        <header class="header">
+            <h1 class="title">LabGuide</h1>
+            <p>科研文献工具指南数据库</p>
+        </header>
+
+        <nav class="category-nav">
+            <div class="category-chip active">全部工具</div>
+            <div class="category-chip">文献检索</div>
+            <div class="category-chip">文献管理</div>
+            <div class="category-chip">论文写作</div>
+            <div class="category-chip">科研绘图</div>
+        </nav>
+
+        <section class="search-section">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="输入工具名称或关键词...">
+                <button class="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </section>
+
+        <main class="tool-grid">
+            <!-- 文献检索工具 -->
+            <article class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                    <div class="tool-badges">
+                        <span class="badge recommend">编辑推荐</span>
+                    </div>
+                </div>
+                <h3>Web of Science</h3>
+                <div class="tool-features">
+                    <span class="feature-tag">跨库检索</span>
+                    <span class="feature-tag">引文分析</span>
+                    <span class="feature-tag">期刊评价</span>
+                </div>
+                <p class="tool-desc">全球核心学术期刊索引数据库，覆盖自然科学、社会科学和艺术人文领域</p>
+                <div class="tool-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-download"></i>
+                        <span>12万+/月</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-star"></i>
+                        <span>9.2 评分</span>
+                    </div>
+                </div>
+                <button class="tool-action">
+                    <i class="fas fa-external-link-alt"></i>
+                    访问平台
+                </button>
+            </article>
+
+            <!-- 文献管理工具 -->
+            <article class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="tool-badges">
+                        <span class="badge free">免费</span>
+                        <span class="badge open-source">开源</span>
+                    </div>
+                </div>
+                <h3>Zotero</h3>
+                <div class="tool-features">
+                    <span class="feature-tag">参考文献生成</span>
+                    <span class="feature-tag">浏览器插件</span>
+                    <span class="feature-tag">团队协作</span>
+                </div>
+                <p class="tool-desc">文献收集、管理、引用一站式解决方案，支持Word/LibreOffice集成</p>
+                <div class="tool-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-users"></i>
+                        <span>560万用户</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-puzzle-piece"></i>
+                        <span>87+插件</span>
+                    </div>
+                </div>
+                <button class="tool-action">
+                    <i class="fas fa-download"></i>
+                    下载客户端
+                </button>
+            </article>
+
+            <!-- 论文写作工具 -->
+            <article class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <div class="tool-badges">
+                        <span class="badge free">免费</span>
+                    </div>
+                </div>
+                <h3>Academic Phrasebank</h3>
+                <div class="tool-features">
+                    <span class="feature-tag">写作模板</span>
+                    <span class="feature-tag">例句库</span>
+                    <span class="feature-tag">论文结构</span>
+                </div>
+                <p class="tool-desc">提供学术写作常用短语模板，涵盖论文各个章节的典型句式</p>
+                <div class="tool-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-globe"></i>
+                        <span>多语言支持</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>PDF指南</span>
+                    </div>
+                </div>
+                <button class="tool-action">
+                    <i class="fas fa-book"></i>
+                    查看模板
+                </button>
+            </article>
+
+            <!-- 科研绘图工具 -->
+            <article class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="tool-badges">
+                        <span class="badge recommend">推荐</span>
+                    </div>
+                </div>
+                <h3>OriginLab</h3>
+                <div class="tool-features">
+                    <span class="feature-tag">数据可视化</span>
+                    <span class="feature-tag">曲线拟合</span>
+                    <span class="feature-tag">批量处理</span>
+                </div>
+                <p class="tool-desc">专业的科学绘图与数据分析工具，支持超过100种图表类型</p>
+                <div class="tool-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-cube"></i>
+                        <span>25+ 分析工具</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-shapes"></i>
+                        <span>3D绘图</span>
+                    </div>
+                </div>
+                <button class="tool-action">
+                    <i class="fas fa-video"></i>
+                    视频教程
+                </button>
+            </article>
+        </main>
+    </div>
+
+    <script>
+    // 分类筛选功能
+    document.querySelectorAll('.category-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+            // 移除所有激活状态
+            document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
+            // 添加当前激活状态
+            chip.classList.add('active');
+            // 获取分类名称
+            const category = chip.textContent.trim();
+            // 筛选逻辑（需根据实际内容实现）
+            filterTools(category);
+        });
+    });
+
+    function filterTools(category) {
+        const cards = document.querySelectorAll('.tool-card');
+        cards.forEach(card => {
+            // 实际项目中应根据数据属性进行筛选
+            const match = category === '全部工具' || card.querySelector('h3').textContent.includes(category);
+            card.style.display = match ? 'block' : 'none';
+        });
+    }
+    </script>
+</body>
+</html>
