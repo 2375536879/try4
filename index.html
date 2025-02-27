@@ -281,7 +281,7 @@
 
         <main class="tool-grid">
             <!-- 文献检索工具 -->
-            <article class="tool-card">
+            <article class="tool-card" data-category="文献检索">
                 <div class="tool-header">
                     <div class="tool-icon">
                         <i class="fas fa-search-plus"></i>
@@ -314,7 +314,7 @@
             </article>
 
             <!-- 文献管理工具 -->
-            <article class="tool-card">
+            <article class="tool-card" data-category="文献管理">
                 <div class="tool-header">
                     <div class="tool-icon">
                         <i class="fas fa-book-open"></i>
@@ -348,7 +348,7 @@
             </article>
 
             <!-- 论文写作工具 -->
-            <article class="tool-card">
+            <article class="tool-card" data-category="论文写作">
                 <div class="tool-header">
                     <div class="tool-icon">
                         <i class="fas fa-edit"></i>
@@ -381,7 +381,7 @@
             </article>
 
             <!-- 科研绘图工具 -->
-            <article class="tool-card">
+            <article class="tool-card" data-category="科研绘图">
                 <div class="tool-header">
                     <div class="tool-icon">
                         <i class="fas fa-chart-line"></i>
@@ -433,40 +433,18 @@ document.querySelectorAll('.category-chip').forEach(chip => {
 function filterTools(category) {
     const cards = document.querySelectorAll('.tool-card');
     cards.forEach(card => {
-        // 获取卡片标题
-        const title = card.querySelector('h3').textContent.trim();
+        // 获取卡片的分类
+        const cardCategory = card.getAttribute('data-category'); // 假设每个工具卡片有 data-category 属性
 
-        // 根据分类名称进行筛选
-        switch (category) {
-            case '全部工具':
-                // 显示所有卡片
-                card.style.display = 'block';
-                break;
-
-            case '文献检索':
-                // 只显示包含 "文献检索" 相关的卡片
-                card.style.display = title.includes('文献检索') ? 'block' : 'none';
-                break;
-
-            case '文献管理':
-                // 只显示包含 "文献管理" 相关的卡片
-                card.style.display = title.includes('文献管理') ? 'block' : 'none';
-                break;
-
-            case '论文写作':
-                // 只显示包含 "论文写作" 相关的卡片
-                card.style.display = title.includes('论文写作') ? 'block' : 'none';
-                break;
-
-            case '科研绘图':
-                // 只显示包含 "科研绘图" 相关的卡片
-                card.style.display = title.includes('科研绘图') ? 'block' : 'none';
-                break;
-
-            default:
-                // 如果没有匹配的分类，隐藏所有卡片
-                card.style.display = 'none';
-                break;
+        if (category === '全部工具') {
+            // 显示所有工具卡片
+            card.style.display = 'block';
+        } else if (cardCategory === category) {
+            // 仅显示与当前分类匹配的工具卡片
+            card.style.display = 'block';
+        } else {
+            // 隐藏不匹配的工具卡片
+            card.style.display = 'none';
         }
     });
 }
