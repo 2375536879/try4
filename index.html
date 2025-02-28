@@ -280,6 +280,7 @@
         </section>
 
         <main class="tool-grid">
+
             <!-- 文献检索工具 -->
             <article class="tool-card" data-category="文献检索">
                 <div class="tool-header">
@@ -412,6 +413,47 @@
                     视频教程
                 </button>
             </article>
+
+
+
+
+            <article class="tool-card" data-category="科研绘图">
+                <div class="tool-header">
+                    <div class="tool-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="tool-badges">
+                        <span class="badge recommend">推荐</span>
+                        <span class="badge free">免费</span>
+                        <span class="badge open-source">开源</span>
+                    </div>
+                </div>
+                <h3>Apache ECharts</h3>
+                <div class="tool-features">
+                    <span class="feature-tag">交互式图表</span>
+                    <span class="feature-tag">多图表类型</span>
+                    <span class="feature-tag">数据分析</span>
+                </div>
+                <p class="tool-desc">开源JavaScript图表库，支持折线图、柱状图、地图等100+图表类型，提供交互式数据分析和个性化定制功能。</p>
+                <div class="tool-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-globe"></i>
+                        <span>多语言支持</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-users"></i>
+                        <span>活跃社区</span>
+                    </div>
+                </div>
+                <!-- 这个button是完成的 -->
+                <button class="tool-action" onclick="goToDetailPage('Apache ECharts')">
+                    <i class="fas fa-external-link-alt"></i>
+                    访问官网
+                </button>
+            </article>
+
+
+
         </main>
     </div>
 
@@ -447,6 +489,13 @@ function filterTools(category) {
             card.style.display = 'none';
         }
     });
+}
+
+
+function goToDetailPage(toolName) {
+    // 根据工具名称生成详细页面的 URL
+    const url = `https://2375536879.github.io/Res/`;
+    window.location.href = url;
 }
 
     </script>
