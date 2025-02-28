@@ -291,7 +291,7 @@
                         <span class="badge recommend">编辑推荐</span>
                     </div>
                 </div>
-                <h3>Web of Science</h3>
+                <h3 tool-category="Web of Science">Web of Science</h3>
                 <div class="tool-features">
                     <span class="feature-tag">跨库检索</span>
                     <span class="feature-tag">引文分析</span>
@@ -428,7 +428,7 @@
                         <span class="badge open-source">开源</span>
                     </div>
                 </div>
-                <h3>Apache ECharts</h3>
+                <h3 tool-category="Apache ECharts">Apache ECharts</h3>
                 <div class="tool-features">
                     <span class="feature-tag">交互式图表</span>
                     <span class="feature-tag">多图表类型</span>
@@ -445,7 +445,6 @@
                         <span>活跃社区</span>
                     </div>
                 </div>
-                <!-- 这个button是完成的 -->
                 <button class="tool-action" onclick="goToDetailPage('Apache ECharts')">
                     <i class="fas fa-external-link-alt"></i>
                     访问官网
@@ -491,11 +490,20 @@ function filterTools(category) {
     });
 }
 
-
+toolName=tool-category;
 function goToDetailPage(toolName) {
     // 根据工具名称生成详细页面的 URL
-    const url = `https://2375536879.github.io/Res/`;
-    window.location.href = url;
+    switch(toolName){
+        case 'Apache ECharts':
+        const url = `https://2375536879.github.io/Res/`;
+        window.location.href = url;
+        break;
+
+        
+        default:
+        break;
+    }
+    
 }
 
     </script>
