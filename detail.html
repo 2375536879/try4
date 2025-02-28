@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Apache ECharts 使用指南</title>
+    
+    <!-- 引入ECharts库 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
+    
+    <!-- 引入Markdown解析器 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #2a5caa;
+            --secondary-color: #6c757d;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.8;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #f8f9fa;
+        }
+
+        .documentation-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-top: 2rem;
+        }
+
+        code {
+            background-color: #f3f3f3;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+        }
+
+        pre code {
+            display: block;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .chart-demo {
+            width: 100%;
+            height: 500px;
+            margin: 2rem 0;
+            border: 1px solid #eee;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="documentation-container">
+    <!-- Markdown内容容器 -->
+    <div id="markdown-content"></div>
+
+    <!-- 实时图表演示 -->
+    <div id="live-demo" class="chart-demo"></div>
+</div>
+
+<script>
+// Markdown原始内容
+const markdownContent = `# Apache ECharts 开源可视化图表库
+
+## 一、ECharts是什么？
+
+[**Apache ECharts**](https://echarts.apache.org/zh/index.html)（后文简称ECharts）是一个开源的、基于 JavaScript 的数据可视化库，广泛用于在网页和应用中展示交互式图表和图形。ECharts 提供了一种易于使用的方式来展示复杂的数据，并支持丰富的互动功能。它可以生成各种类型的图表，如折线图、柱状图、饼图、散点图、地图等，并且具有强大的自定义功能，可以根据需求调整样式和行为。
+
+#### 主要特点
+
+##### **丰富的图表类型：**
+
+ECharts 支持多种图表类型，包括线图、柱状图、饼图、散点图、雷达图、热力图、地图等。它还支持组合图表，可以在一个图表中展示多种图形。
+
+##### **高性能：**
+
+ECharts 使用了基于 HTML5 Canvas 和 SVG 的渲染方式，因此具备较高的性能，能够处理大量数据的展示而不造成显著的性能下降，适合处理大规模的数据可视化。
+
+##### **高度可定制：**
+
+提供了丰富的配置项，用户可以对图表的外观、交互方式、动画效果等进行详细的自定义。例如，开发者可以轻松修改图表的颜色、字体等，满足不同的需求。
+
+##### **交互功能：**
+
+支持丰富的交互功能，如鼠标悬停、点击事件、缩放、拖拽等，使得用户能够直观地与图表进行交互。
+
+##### **扩展性和插件支持：**
+
+ECharts 提供了插件机制，开发者可以根据需要自定义扩展功能。例如，开发者可以创建自己的图表类型，或者扩展 ECharts 的交互功能。
+
+## 二、Echarts如何使用？
+
+### 1. Echarts环境配置
+
+##### 1.打开官网下载选项，页面拉到最底部，选择在线定制
+
+**2.选择自己需要的模块（注意：代码最好不要压缩）**
+
+**3.自行安装 [WebStorm](https://www.jetbrains.com/webstorm/)**
+
+**4.在WebStorm内新建项目，并在项目内创建一个命名为js的子文件夹**
+
+**5.将下载目录中的echarts.js文件复制到js文件夹中**
+
+## 2、Echarts简单使用
+
+**1.在项目中创建一个html文件，注意不要创建在js文件夹里**
+
+**2.回到官网，复制官网所给的测试用例，拷贝到html文件中（其他图形也同理）**
+
+**==注意 src=后路径要改成正确路径==**
+
+**3.点击运行**
+
+**恭喜你，第一个Echarts图表完成了！**`;
+
+// 渲染Markdown内容
+document.getElementById('markdown-content').innerHTML = marked.parse(markdownContent);
+
+// 初始化示例图表
+const myChart = echarts.init(document.getElementById('live-demo'));
+const option = {
+    title: {
+        text: 'ECharts 动态示例',
+        subtext: '实时数据展示'
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data:['访问量','下载量']
+    },
+    xAxis: {
+        type: 'category',
+        data: ['周一','周二','周三','周四','周五','周六','周日']
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+        {
+            name: '访问量',
+            type: 'line',
+            smooth: true,
+            data: [150, 230, 224, 218, 135, 147, 260]
+        },
+        {
+            name: '下载量',
+            type: 'bar',
+            data: [45, 82, 91, 34, 52, 77, 89]
+        }
+    ]
+};
+myChart.setOption(option);
+
+// 动态更新数据
+setInterval(() => {
+    const newData = Array.from({length:7}, () => Math.floor(Math.random()*300));
+    myChart.setOption({
+        series: [{
+            data: newData
+        }]
+    });
+}, 3000);
+</script>
+
+</body>
+</html>
