@@ -1,0 +1,294 @@
+:root {
+    --primary-blue: #2A5CAA;
+    --background: #F8F9FA;
+    --text-primary: #212529;
+    --border: #DEE2E6;
+    --success: #43a047;
+    --warning: #ffc107;
+    --info: #2196f3;
+    --transition-speed: 0.2s;
+}
+
+body {
+    background: var(--background);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.science-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* 头部样式 */
+.header {
+    border-bottom: 3px solid var(--primary-blue);
+    padding: 2rem 0;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: 2.8rem;
+    color: var(--primary-blue);
+    font-weight: 600;
+    letter-spacing: -0.05em;
+    margin: 0;
+}
+
+/* 搜索区域 */
+.search-section {
+    display: grid;
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+}
+
+.search-box {
+    display: flex;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow var(--transition-speed);
+}
+
+.search-box:focus-within {
+    box-shadow: 0 2px 8px rgba(42,92,170,0.1);
+    border-color: var(--primary-blue);
+}
+
+.search-input {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    font-size: 1.1rem;
+    outline: none;
+}
+
+.search-button {
+    background: var(--primary-blue);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    cursor: pointer;
+    transition: opacity var(--transition-speed);
+}
+
+.search-button:hover {
+    opacity: 0.9;
+}
+
+/* 分类导航 */
+.category-nav {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.category-chip {
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    background: rgba(42,92,170,0.1);
+    color: var(--primary-blue);
+    cursor: pointer;
+    transition: background-color var(--transition-speed),
+                color var(--transition-speed);
+    font-size: 0.95rem;
+    user-select: none;
+}
+
+.category-chip.active {
+    background: var(--primary-blue);
+    color: white;
+}
+
+.category-chip:not(.active):hover {
+    background: rgba(42,92,170,0.2);
+}
+
+/* 工具卡片 */
+.tool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.tool-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: transform var(--transition-speed),
+                box-shadow var(--transition-speed);
+    position: relative;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.tool-card.hidden {
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.tool-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.tool-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.2rem;
+}
+
+.tool-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(42,92,170,0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tool-icon i {
+    color: var(--primary-blue);
+    font-size: 1.4rem;
+}
+
+.tool-badges {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: opacity var(--transition-speed);
+}
+
+.badge.free {
+    background: rgba(67, 160, 71, 0.1);
+    color: var(--success);
+}
+
+.badge.recommend {
+    background: rgba(255, 193, 7, 0.1);
+    color: var(--warning);
+}
+
+.badge.open-source {
+    background: rgba(33, 150, 243, 0.1);
+    color: var(--info);
+}
+
+.tool-features {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+}
+
+.feature-tag {
+    background: rgba(42,92,170,0.05);
+    color: var(--primary-blue);
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    transition: background-color var(--transition-speed);
+}
+
+.feature-tag:hover {
+    background: rgba(42,92,170,0.1);
+}
+
+.tool-desc {
+    color: #666;
+    margin: 1rem 0;
+    line-height: 1.5;
+    min-height: 3.6em;
+}
+
+.tool-meta {
+    display: flex;
+    justify-content: space-between;
+    margin: 1.5rem -0.5rem 0;
+    padding: 1rem 0;
+    border-top: 1px solid var(--border);
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #666;
+    padding: 0 0.5rem;
+    font-size: 0.9rem;
+}
+
+.tool-action {
+    width: 100%;
+    padding: 0.8rem;
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: opacity var(--transition-speed),
+                transform 0.1s ease;
+    font-size: 1rem;
+                                                  }
+
+.tool-action:hover {
+    opacity: 0.9;
+}
+
+.tool-action:active {
+    transform: scale(0.98);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .science-container {
+        padding: 1.5rem;
+    }
+
+    .title {
+        font-size: 2.2rem;
+    }  
+
+    .search-button {
+        padding: 1rem;
+    }
+
+    .tool-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .category-nav {
+        gap: 0.8rem;
+    }
+
+    .category-chip {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* 加载动画 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.tool-card {
+    animation: fadeIn 0.4s ease forwards;
+}

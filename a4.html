@@ -1,15 +1,11 @@
-<!-- Typora -->
-
-
-<!--擦除HTTP请求头里的referrer, 绕过码云的防盗链-->
+<!-- 移除HTTP请求头里的referrer, 绕过防盗链 -->
 <meta name="referrer" content="no-referrer">
-
 
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Typora</title>
+    <title>Typora 使用指南</title>
     
     <!-- 引入ECharts库 -->
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
@@ -19,8 +15,9 @@
     
     <style>
         :root {
-            --primary-color: #2a5caa;
-            --secondary-color: #6c757d;
+            --primary-color: #2a5caa; /* 主色调 */
+            --secondary-color: #6c757d; /* 副色调 */
+            --accent-color: #10a37f; /* 强调色 */
         }
 
         body {
@@ -64,13 +61,61 @@
             margin: 1rem 0;
             overflow-x: auto;
         }
-
-        .chart-demo {
-            width: 100%;
-            height: 500px;
-            margin: 2rem 0;
-            border: 1px solid #eee;
-            border-radius: 8px;
+        /* 修改后的.footer样式 */
+        .footer {
+    display: flex;
+    justify-content: flex-start; /* 改为左对齐 */
+    gap: 12px; /* 精确控制间距 */
+    margin-top: 20px;
+        }
+        
+        .footer a {
+    border: 1px solid #007bff;
+    color:  #FFA500;
+    padding: 8px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    margin-right: 10px; /* 增加右侧间距 */
+        }
+        
+        /* 移除最后一个元素的右边距 */
+        .footer a:last-child {
+           margin-right: 0;
+        }
+        .footer a:hover {
+    color: white;
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    transform: translateY(-2px); /* 悬停微动效 */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+        /* 移动端适配 */
+        @media (max-width: 480px) {
+    .footer {
+        flex-wrap: wrap; /* 允许换行 */
+        gap: 8px;
+    }
+    .footer a {
+        flex: 1 1 45%; /* 两列布局 */
+        text-align: center;
+        margin-right: 0;
+    }
+        }
+        
+        
+        .container2 {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee; /* 增加分割线 */
+        }
+        .myfoot {
+            color: var(--secondary-color);
+            font-size: 12px;
+            margin-bottom: 15px;
+            letter-spacing: 1px; /* 字间距优化 */
         }
     </style>
 </head>
@@ -81,33 +126,40 @@
     <div id="markdown-content"></div>
 </div>
 
+
+
+
+<!-- 页脚 -->
+ <div class="container2">
+    <div class="myfoot">快速上手</div>
+    <div class="footer">
+        <a href="https://www.typora.net/" target="_blank">官网</a>
+        <a href="b4.html">Markdown 教程</a>
+        <a href="c4.html">基于Typora的图床建立</a>
+    </div>
+ </div>
+ 
+
 <script>
 // Markdown原始内容
 const markdownContent = `
-
-# Typora
-
+# Typora 使用指南
 ### 概述
 Typora 是一款全功能的 Markdown 编辑器，支持实时预览、HTML 导出、数学公式、表格、图片等多种格式的输入和展示。其特点是“所见即所得”（WYSIWYG），即编辑时直接展示渲染效果，用户无需切换预览模式。
 
 ### 主要功能：
-- 支持 Markdown 格式，并提供实时预览功能。  
-- 支持 数学公式、表格、代码块 等多种格式的输入。
-- 支持 图片 插入，且支持拖拽。
-- 提供丰富的 主题 和 自定义样式。
-- 可以导出为多种格式，如 PDF、HTML、Word 等。
+- ​**支持 Markdown 格式**，并提供实时预览功能。  
+- ​**支持数学公式、表格、代码块**​ 等多种格式的输入。
+- ​**支持图片插入**，且支持拖拽。
+- ​**提供丰富的主题和自定义样式**。
+- ​**可以导出为多种格式**，如 PDF、HTML、Word 等。
+
 
 `;
 
 // 渲染Markdown内容
 document.getElementById('markdown-content').innerHTML = marked.parse(markdownContent);
-
-
-
 </script>
-
-</body>
-</html>
 
 <script>
     // 页面加载后自动滚动到锚点位置
@@ -121,4 +173,7 @@ document.getElementById('markdown-content').innerHTML = marked.parse(markdownCon
             setTimeout(() => target.style.backgroundColor = '', 2000);
         }
     });
-    </script>
+</script>
+
+</body>
+</html>

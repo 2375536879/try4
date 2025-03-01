@@ -268,6 +268,8 @@
             <div class="category-chip">通用大模型</div>
 
             <div class="category-chip">视觉大模型</div>
+             
+            <div class="category-chip">markdown使用</div>
 
             <div class="category-chip">论文润色</div>
 
@@ -293,7 +295,7 @@
             <div class="category-chip">质性研究</div>
 
 
-<!-- ------------ -->
+           <!-- ------------ -->
             <div class="category-chip">文献检索</div>
             <div class="category-chip">文献管理</div>
             <div class="category-chip">论文写作</div>
@@ -301,7 +303,6 @@
            
 
             
-            通用大模型
 
 
 
@@ -358,13 +359,13 @@
                         <span>9.9 评分</span>
                     </div>
                 </div>
-                <button class="tool-action">
+                <button class="tool-action"onclick="goToDetailPage('deepseek')">
                     <i class="fas fa-external-link-alt"></i>
                     链接直达
                 </button>
             </article>
                 
-            <!-- 通用大模型 -->
+            <!-- 视觉大模型 -->
             <article class="tool-card" data-category="通用大模型">
                 <div class="tool-header">
                     <div class="tool-icon">
@@ -390,7 +391,7 @@
                         <span>9.9 评分</span>
                     </div>
                 </div>
-                <button class="tool-action">
+                <button class="tool-action" onclick="goToDetailPage('gpt-4o')">
                     <i class="fas fa-external-link-alt"></i>
                     链接直达
                 </button>
@@ -398,9 +399,40 @@
             </article>
 
 
-           
+           <!-- markdown使用 -->
+           <article class="tool-card" data-category="markdown使用">
 
 
+            <div class="tool-header">
+                <div class="tool-icon">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+                <div class="tool-badges">
+                    <span class="badge recommend">好评如潮</span>
+                </div>
+            </div>
+            <h3 tool-category="Web of Science">Typora</h3>
+            <div class="tool-features">
+                <span class="feature-tag">所见即所得</span>
+              
+            </div>
+            <p class="tool-desc">全功能的 Markdown 编辑器</p>
+            <div class="tool-meta">
+                <div class="meta-item">
+                    <i class="fas fa-download"></i>
+                    <span>12万+/月</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-star"></i>
+                    <span>9.9 评分</span>
+                </div>
+            </div>
+            <button class="tool-action"onclick="goToDetailPage('Typora')">
+                <i class="fas fa-external-link-alt"></i>
+                链接直达
+            </button>
+        </article>
+     
 
 
 
@@ -580,6 +612,10 @@
 
         </main>
     </div>
+      
+
+
+
 
     <script>
     // 分类筛选功能
@@ -617,20 +653,41 @@ function filterTools(category) {
 
 toolName=tool-category;
 function goToDetailPage(toolName) {
-    // 根据工具名称生成详细页面的 URL
+    // 生成标准化的 Hash ID（兼容特殊字符）
+    const hashId = toolName.toLowerCase().replace(/[\s]+/g, '-');
+ 
     switch(toolName){
         case 'Apache ECharts':
-        const url = `https://2375536879.github.io/Res/`;
-        window.location.href = url;
-        break;
+            {
+               // 跳转到 detail.html 并携带锚点参数
+            window.location.href = `a1.html#tool-${hashId}`;
+            break;
+            }
+        case 'gpt-4o':
+            { 
+             window.location.href=`a2.html#tool-${hashId}`
+                break;
+            }
+        case 'deepseek':
+            {
+                window.location.href=`a3.html#tool-${hashId}`
+                break;
+            }
+        case 'Typora':
+            {
+                window.location.href=`a4.html#tool-${hashId}`
+                break;
+            }
+       default:break;
 
-        
-        default:
-        break;
     }
-    
+
 }
 
     </script>
 </body>
 </html>
+
+
+
+

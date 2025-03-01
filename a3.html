@@ -1,0 +1,117 @@
+<!-- deepseek -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- 头部元信息保持不变 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>deepseek 简介</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top:10%;
+            width: 100%;
+            height:30%;
+            max-width: 400px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+        }
+        .header a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 15px;
+        }
+        h1 {
+            color: #333;
+            margin: 0 0 8px 0;
+            font-size: 22px;
+        }
+        .content p {
+            color: #666;
+            font-size: 14px;
+            margin: 0 0 15px 0;
+        }
+        .stats {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            margin: 15px 0;
+            color: #666;
+            font-size: 14px;
+        }
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .footer a {
+            border: 1px solid #007bff;
+            color: #007bff;
+            padding: 6px 15px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 原有HTML结构保持不变 -->
+        <div class="header">
+            <a href="#">通用大模型</a>
+            <a href="#">deepseek</a>
+        </div>
+        
+        <div class="content">
+            <h1>deepseek</h1>
+            <p>探索未至之境</p>
+            
+            <div class="stats">
+                <span>👍 74</span>
+                <span>👀 11363</span>
+            </div>
+        </div>
+
+        <div class="footer">
+            <a href="https://chat.deepseek.com/">链接直达</a>
+            <!-- 修改详细介绍按钮的跳转方式 -->
+            <a href="b3.html" id="detailLink">本地部署</a>
+        </div>
+    </div>
+
+    <script>
+        // 简化后的跳转逻辑
+        // document.getElementById('detailLink').addEventListener('click', function(e) {
+        //     e.preventDefault(); // 阻止默认跳转行为
+        //     window.location.href = 'b2.html'; // 执行页面跳转
+        // });
+        document.getElementById('detailLink').addEventListener('click', function(e) {
+                          e.preventDefault();
+                          setTimeout(() => {
+                              window.location.href = 'b3.html';
+                            }, 0); // 延迟到主线程空闲时执行
+                        });
+    
+    </script>
+    
+</body>
+</html>

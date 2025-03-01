@@ -1,0 +1,156 @@
+<!-- 移除HTTP请求头里的referrer, 绕过防盗链 -->
+<meta name="referrer" content="no-referrer">
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>GPT-4o 使用指南</title>
+    
+    <!-- 引入交互式演示库 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
+    
+    <!-- 引入Markdown解析器 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #10a37f;  /* OpenAI品牌绿色 */
+            --secondary-color: #6c757d;
+        }
+
+        .gpt4o-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+        }
+
+        .chat-demo {
+            height: 600px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .message-bubble {
+            background: #f1f1f1;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 15px;
+            max-width: 70%;
+        }
+
+        .user-message {
+            background: var(--primary-color);
+            color: white;
+            margin-left: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="gpt4o-container">
+    <div id="markdown-content"></div>
+    
+    <!-- 交互式演示区 -->
+    <div id="chat-demo" class="chat-demo"></div>
+</div>
+
+<script>
+const markdownContent = `
+# GPT-4o 全面解析
+
+## 概述
+GPT-4o（"Omni"）是 OpenAI 于 ​**2024 年 5 月**推出的 GPT-4 多模态增强版本，定位为「全能型」语言模型[1,2](@ref)。截至 2025 年 3 月，它已通过多次迭代升级（如 2024 年 12 月推出的 o1 模型、2025 年 1 月新增的 "Tasks" 功能），成为支持文本/图像/音频/视频混合输入输出的旗舰 AI 系统[2,3](@ref)。
+
+---
+
+## 核心功能升级
+### 1. 多模态全支持
+- ​**输入输出组合**：任意混合文本、图像、音频（甚至视频），例如上传图片生成描述、语音对话中同步分析图像[1,2](@ref)
+- ​**跨模态推理**：通过图表解释数学问题、根据语音指令生成图像（如网页设计草图）[3,5](@ref)
+- ​**情感分析**：识别对话中的情绪波动，提供更人性化回应（如安慰沮丧用户）[3,5](@ref)
+
+### 2. 实时交互性能
+- ​**响应速度**：语音交互平均 232-320 毫秒延迟，接近人类对话节奏[1,2](@ref)
+- ​**文本生成**：每秒输出 110 个 Token，比 GPT-4 Turbo 快 3 倍[1](@ref)
+- ​**高并发处理**：支持 128K Token 上下文窗口，可分析 300 页文档或 5 小时对话记录[1,6](@ref)
+
+### 3. 效率与成本优化
+- ​**API 价格**：比 GPT-4 Turbo 降低 50%，输入/输出 Token 成本分别为 $5/1M 和 $15/1M[1,6](@ref)
+- ​**能耗控制**：架构优化使相同算力下推理速度提升 2 倍[2](@ref)
+
+---
+
+## 技术参数
+| 指标                | 表现                          | 对比提升               |
+|---------------------|-------------------------------|------------------------|
+| 多语言准确率        | 非英语任务提升 20%[1](@ref)        | vs. GPT-4              |
+| 文本生成连贯性      | 提升 25%[3](@ref)                  | vs. GPT-3.5            |
+| 编码任务成功率       | SWE-Lancer 基准超越 o3-mini[4](@ref) | vs. 前代模型           |
+| 幻觉率              | 37.1%（行业最低）[4](@ref)         | vs. o3-mini 的 80.3%   |
+
+---
+
+## 应用场景
+1. ​**实时翻译**：支持 50+ 语言同步语音转译，适用于国际会议[2,6](@ref)
+2. ​**创意协作**：根据故事梗概生成插画+剧本+配乐方案[5](@ref)
+3. ​**数据分析**：自动解析 Excel/PDF 生成可视化报告（需配合 "Tasks" 功能）[2](@ref)
+4. ​**教育辅助**：通过图像识别讲解物理实验步骤，支持多轮追问[3](@ref)
+
+---
+
+## 用户体验创新
+- ​**个性化设置**：自定义语气（幽默/专业）、角色属性（如「毒舌助手」）[2,5](@ref)
+- ​**语音交互**：5 种情感化音色可选，支持「道歉延迟」等拟人化表达[2](@ref)
+- ​**免费访问**：通过 [FineChat.ai](https://finechat.ai) 无需登录即可体验基础功能[6](@ref)
+
+---
+
+## 与同类模型对比
+| 模型        | 优势                          | 局限性                   |
+|-------------|-------------------------------|--------------------------|
+| ​**GPT-4o**​  | 多模态实时交互、低幻觉率      | 复杂数学推理弱于 o3-mini[4](@ref) |
+| ​**Claude 3.7**​ | 编码能力更强                  | 仅支持文本交互           |
+| ​**GPT-4.5**​ | 知识储备更丰富                | API 价格高达 $150/1M Tokens[4](@ref) |
+
+---
+
+> 可通过 [OpenAI Playground](https://platform.openai.com/playground) 或 [FineChat.ai](https://finechat.ai) 体验完整功能，建议开发者优先集成「o1 模型」以平衡性能与成本[2,6](@ref)。
+`;
+
+// 渲染Markdown内容
+document.getElementById('markdown-content').innerHTML = marked.parse(markdownContent);
+
+// 交互式聊天演示
+const chatDemo = document.getElementById('chat-demo');
+let messageCount = 0;
+
+function addMessage(content, isUser=false) {
+    const div = document.createElement('div');
+    div.className = `message-bubble ${isUser ? 'user-message' : ''}`;
+    div.innerHTML = content;
+    chatDemo.appendChild(div);
+    chatDemo.scrollTop = chatDemo.scrollHeight;
+}
+
+// 模拟GPT-4o响应
+addMessage('您好！我是GPT-4o，可以处理文本、图像和语音。请问需要什么帮助？');
+
+// 模拟用户交互
+setTimeout(() => {
+    addMessage('请解释量子计算原理', true);
+    setTimeout(() => {
+        addMessage(`量子计算利用量子比特的叠加态和纠缠态实现并行计算。主要特点包括：
+        - 量子叠加：量子比特同时存在0和1状态
+        - 量子纠缠：多个量子比特产生关联状态
+        - 量子隧穿：穿越经典不可逾越的能量壁垒`);
+    }, 1200);
+}, 2000);
+</script>
+</body>
+</html>
