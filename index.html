@@ -609,6 +609,41 @@
             </article>
 
 
+            
+            <!--数据分析-->
+            <article class="tool-card" data-category="数据分析">
+                <div class="tool-header">
+                    <div class="tool-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="tool-badges">
+                        <span class="badge recommend">推荐</span>
+                    </div>
+                </div>
+                <h3>OmicShare</h3>
+                <div class="tool-features">
+                    <span class="feature-tag">数据可视化</span>
+                    <span class="feature-tag">曲线拟合</span>
+                    <span class="feature-tag">批量处理</span>
+                </div>
+                <p class="tool-desc">专业的科学绘图与数据分析工具，支持超过100种图表类型</p>
+                <div class="tool-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-cube"></i>
+                        <span>25+ 分析工具</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-shapes"></i>
+                        <span>3D绘图</span>
+                    </div>
+                </div>
+                <button class="tool-action"onclick="goToDetailPage('OmicShare')">
+                    <i class="fas fa-video"></i>
+                    视频教程
+                </button>
+            </article>
+
+
 
         </main>
     </div>
@@ -676,6 +711,11 @@ function goToDetailPage(toolName) {
         case 'Typora':
             {
                 window.location.href=`a4.html#tool-${hashId}`
+                break;
+            }
+        case 'OmicShare':
+            {
+                window.location.href=`a5.html#tool-${hashId}`
                 break;
             }
        default:break;
